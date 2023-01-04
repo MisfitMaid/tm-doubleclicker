@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Doubleclicker": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Keira\\test.Map.Gbx"
+    }
+  }
+}
