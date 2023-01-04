@@ -5,7 +5,27 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>Doubleclicker</StartupObject>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SignAssembly>False</SignAssembly>
+    <Title>TM2020 Doubleclicker</Title>
+    <Authors>MisfitMaid &lt;misfit@misfitmaid.com&gt;</Authors>
+    <Product>TM2020 Doubleclicker</Product>
+    <PackageProjectUrl>https://github.com/sylae/tm-doubleclicker</PackageProjectUrl>
+    <ApplicationIcon>ico1.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ico1.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Websocket.Client" Version="4.4.43" />
