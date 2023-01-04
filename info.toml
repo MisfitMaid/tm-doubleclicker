@@ -1,0 +1,8 @@
+[meta]
+name = "Doubleclicker"
+author = "MisfitMaid"
+category = "Utilities"
+version = "0.1"
+
+[script]
+dependencies = ["WebSockets"]
