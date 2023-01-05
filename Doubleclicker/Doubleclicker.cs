@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Websocket.Client;
@@ -27,7 +28,8 @@ public class Doubleclicker
         var exitEvent = new ManualResetEvent(false);
 
         // get the path from the settings json
-        JsonNode settings = JsonNode.Parse(File.ReadAllText("tmPath.json"));
+        string settingPath = Path.GetDirectoryName(AppContext.BaseDirectory) + "/tmPath.json";
+        JsonNode settings = JsonNode.Parse(File.ReadAllText(settingPath));
 
 
         if (!isTrackmaniaOpen(settings!["tmBinary"].ToString()))

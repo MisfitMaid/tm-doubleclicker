@@ -1,0 +1,17 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.gbx]
+"BrowserFlags"=dword:00000000
+"EditFlags"=dword:00000000
+
+[HKEY_CLASSES_ROOT\.gbx\DefaultIcon]
+@="{{__DOUBLECLICKER_BASEDIR__}},0"
+
+[HKEY_CLASSES_ROOT\.gbx\Shell]
+@="open"
+
+[HKEY_CLASSES_ROOT\.gbx\Shell\open]
+@="open"
+
+[HKEY_CLASSES_ROOT\.gbx\Shell\open\command]
+@="\"{{__DOUBLECLICKER_BASEDIR__}}\" \"%1\""

@@ -13,6 +13,9 @@
     <Product>TM2020 Doubleclicker</Product>
     <PackageProjectUrl>https://github.com/sylae/tm-doubleclicker</PackageProjectUrl>
     <ApplicationIcon>ico1.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

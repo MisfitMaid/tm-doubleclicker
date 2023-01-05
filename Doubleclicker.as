@@ -1,7 +1,4 @@
 void Main() {
-	
-	string helperExecFilePath = IO::FromStorageFolder("Doubleclicker.exe");
-	
 	// save the location of Trackmania so the helper program can open us.
 	string helperDataFilePath = IO::FromStorageFolder("tmPath.json");
 	Json::Value helperData = Json::Object();
@@ -9,6 +6,8 @@ void Main() {
 	Json::ToFile(helperDataFilePath, helperData);
 	
 	// copy the binary out and verify its checksum
+	updateBinary();
+	generateRegistry();
 
     // We can only start a unsecure websockets server
     Net::WebSocket@ websocket = Net::WebSocket();
@@ -124,4 +123,48 @@ string importMap(const string &in filename) {
 		
 		return "Doubleclicked/"+baseName;
 	}
+}
+
+void updateBinary() {
+	IO::FileSource stored("Doubleclicker.exe");
+	string storedHash = Crypto::Sha256(stored.ReadToEnd());
+	
+	if (IO::FileExists(IO::FromStorageFolder("Doubleclicker.exe"))) {
+		// check the existing file and see if we're fine as-is
+		IO::File existing(IO::FromStorageFolder("Doubleclicker.exe"), IO::FileMode::Read);
+		if (Crypto::Sha256(existing.ReadToEnd()) == executableChecksum) {
+			trace("Doubleclicker exe checksum matches");
+			existing.Close();
+			return;
+		} else {
+			warn("Doubleclicker exists but checksum doesn't match, rewriting");
+		}
+	}
+	
+	// validate checksum from packaging process
+	if (storedHash == executableChecksum) {
+		IO::File newFile(IO::FromStorageFolder("Doubleclicker.exe"), IO::FileMode::Write);
+		
+		stored.SetPos(0);
+		newFile.Write(stored.Read(stored.Size()));
+		newFile.Flush();
+		newFile.Close();
+		trace("successfully extracted Doubleclicker.exe");
+		
+	} else {
+		warn("Stored Doubleclicker.exe does not match checksum! Please redownload a new .op file.");
+	}
+	
+}
+
+void generateRegistry() {
+	IO::FileSource stored("regTpl.reg");
+	string tpl = stored.ReadToEnd();
+	
+	string windowsifiedPath = IO::FromStorageFolder("Doubleclicker.exe").Replace("/", "\\").Replace("\\", "\\\\");
+	string finalStr = tpl.Replace("{{__DOUBLECLICKER_BASEDIR__}}", windowsifiedPath);
+	IO::File newFile(IO::FromStorageFolder("associate_gbx.reg"), IO::FileMode::Write);
+	newFile.Write(finalStr);
+	newFile.Flush();
+	newFile.Close();
 }
