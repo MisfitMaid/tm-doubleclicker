@@ -64,6 +64,7 @@ void handleRequest(const string &in payload, Net::WebSocketClient@ wsc) {
 			sendMessage(resp, wsc);
 			break;
 		case 1: // play map
+			if (!Permissions::PlayLocalMap()) return;
 			playMap(req["map"]);
 			resp["type"] = 2;
 			sendMessage(resp, wsc);
