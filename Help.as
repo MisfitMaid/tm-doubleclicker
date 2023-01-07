@@ -11,10 +11,15 @@ void RenderHelp()
 	
 	UI::TextWrapped(Icons::Circle + " Click the 'Open Storage Folder' button below.");
 	UI::TextWrapped(Icons::Circle + " In the Explorer window that appears, right-click the associate_gbx.reg file, and choose 'Merge'. You will require Administrator permissions.");
+	UI::TextWrapped(Icons::Circle + " Click the 'Go to Github' button below, and download the Doubleclicker.exe file given in the assets. Place this file in the same folder as associate_gbx.reg.");
 	UI::TextWrapped(Icons::Circle + " Verify functionality by checking a .Map.Gbx file. It should have a green TM icon and when double-clicked it should open in Trackmania.");
 	
 	if (UI::Button("Open Storage Folder")) {
 		OpenExplorerPath(IO::FromStorageFolder(""));
+	}
+	
+	if (UI::Button("Go to Github")) {
+		OpenBrowserURL("https://github.com/sylae/tm-doubleclicker/releases/tag/v" + Meta::ExecutingPlugin().Version);
 	}
 	
 	UI::Separator();

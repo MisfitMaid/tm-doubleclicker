@@ -2,7 +2,7 @@
 name = "Doubleclicker"
 author = "MisfitMaid"
 category = "Utilities"
-version = "0.1"
+version = "0.2"
 
 [script]
 dependencies = ["WebSockets"]

@@ -5,7 +5,7 @@ void Main() {
 	helperData["tmBinary"] = IO::FromAppFolder("Trackmania.exe");
 	Json::ToFile(helperDataFilePath, helperData);
 	
-	// copy the binary out and verify its checksum
+	// check for binary and verify its checksum
 	updateBinary();
 	generateRegistry();
 
@@ -127,35 +127,18 @@ string importMap(const string &in filename) {
 }
 
 void updateBinary() {
-	IO::FileSource stored("Doubleclicker.exe");
-	string storedHash = Crypto::Sha256(stored.ReadToEnd());
-	
 	if (IO::FileExists(IO::FromStorageFolder("Doubleclicker.exe"))) {
 		// check the existing file and see if we're fine as-is
 		IO::File existing(IO::FromStorageFolder("Doubleclicker.exe"), IO::FileMode::Read);
 		if (Crypto::Sha256(existing.ReadToEnd()) == executableChecksum) {
 			trace("Doubleclicker exe checksum matches");
 			existing.Close();
-			return;
 		} else {
-			warn("Doubleclicker exists but checksum doesn't match, rewriting");
+			warn("Doubleclicker exists but checksum doesn't match. Please redownload.");
 		}
-	}
-	
-	// validate checksum from packaging process
-	if (storedHash == executableChecksum) {
-		IO::File newFile(IO::FromStorageFolder("Doubleclicker.exe"), IO::FileMode::Write);
-		
-		stored.SetPos(0);
-		newFile.Write(stored.Read(stored.Size()));
-		newFile.Flush();
-		newFile.Close();
-		trace("successfully extracted Doubleclicker.exe");
-		
 	} else {
-		warn("Stored Doubleclicker.exe does not match checksum! Please redownload a new .op file.");
+		warn("Doubleclicker binary not found, please see Settings for instructions.");
 	}
-	
 }
 
 void generateRegistry() {
