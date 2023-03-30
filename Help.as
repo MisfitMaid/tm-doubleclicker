@@ -19,7 +19,7 @@ void RenderHelp()
 	}
 	
 	if (UI::Button("Go to Github")) {
-		OpenBrowserURL("https://github.com/sylae/tm-doubleclicker/releases/tag/v" + Meta::ExecutingPlugin().Version);
+		OpenBrowserURL("https://github.com/MisfitMaid/tm-doubleclicker/releases");
 	}
 	
 	UI::Separator();
@@ -28,7 +28,7 @@ void RenderHelp()
 	
 	UI::Markdown(Icons::Patreon + " [https://patreon.com/MisfitMaid](https://patreon.com/MisfitMaid)");
 	UI::Markdown(Icons::Paypal + " [https://paypal.me/MisfitMaid](https://paypal.me/MisfitMaid)");
-	UI::Markdown(Icons::Github + " [https://github.com/sylae/tm-doubleclicker](https://github.com/sylae/tm-doubleclicker)");
+	UI::Markdown(Icons::Github + " [https://github.com/MisfitMaid/tm-doubleclicker](https://github.com/MisfitMaid/tm-doubleclicker)");
 	UI::Markdown(Icons::Discord + " [https://discord.gg/BdKpuFcYzG](https://discord.gg/BdKpuFcYzG)");
 	UI::Markdown(Icons::Twitch + " [https://twitch.tv/MisfitMaid](https://twitch.tv/MisfitMaid)");
 }
